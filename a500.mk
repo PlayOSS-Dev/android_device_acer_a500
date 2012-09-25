@@ -44,7 +44,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
-    $(LOCAL_PATH)/prebuilt/etc/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+    $(LOCAL_PATH)/prebuilt/etc/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
+    $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/prebuilt/etc/mixer_routes.xml:system/etc/mixer_routes.xml
 
 # keychars/layout
 PRODUCT_COPY_FILES += \
