@@ -13,6 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+# inherit proprietary files
+$(call inherit-product-if-exists, vendor/acer/a500/a500-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, build/target/product/full_base.mk)
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
+
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory \
+    audio.a2dp.default \
+    libaudioutils \
+    libtinyalsa \
+    make_ext4fs \
+    librs_jni \
+    setup_fs \
+
 # ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.usb.rc:root/init.picasso.usb.rc \
@@ -77,7 +94,6 @@ PRODUCT_COPY_FILES += \
     system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
     system/extras/bugmailer/send_bug:system/bin/send_bug
 
-#DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=30 \
@@ -90,25 +106,8 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.setupwizard.enterprise_mode=1 \
     keyguard.no_require_sim=true
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-
 PRODUCT_PROPERTY_OVERRIDES += ro.dinfo.radio=Wifi
-
 PRODUCT_CHARACTERISTICS := tablet
-
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory \
-    audio.a2dp.default \
-    libaudioutils \
-    libtinyalsa \
-    make_ext4fs \
-
-# inherit proprietary files
-$(call inherit-product-if-exists, vendor/acer/a500/a500-vendor.mk)
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product, build/target/product/full_base.mk)
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 PRODUCT_NAME := cm_a500
 PRODUCT_DEVICE := a500
