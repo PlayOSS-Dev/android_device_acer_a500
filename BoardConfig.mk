@@ -27,6 +27,7 @@ TARGET_BOOTLOADER_BOARD_NAME := picasso
 TARGET_OTA_ASSERT_DEVICE := picasso,a500
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_USERIMAGES_USE_EXT4  := true
+BOARD_USES_GENERIC_INVENSENSE := false
 
 # kernel
 TARGET_KERNEL_SOURCE := kernel/acer/a500
@@ -43,14 +44,15 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Display
 USE_OPENGL_RENDERER    := true
-BOARD_EGL_CFG          := vendor/acer/a500/proprietary/lib/egl/egl.cfg
-BOARD_USE_SKIA_LCDTEXT := true
+BOARD_EGL_CFG          := device/acer/a500/prebuilt/etc/egl.cfg
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 BOARD_HAS_NO_SELECT_BUTTON  := true
+BOARD_USE_SKIA_LCDTEXT := true
 
 # Audio
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_TINY_AUDIO_HW := true
+BOARD_USES_ALSA_AUDIO := false
 
 # GPS
 BOARD_HAVE_GPS := true

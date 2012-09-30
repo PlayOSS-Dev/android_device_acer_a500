@@ -21,5 +21,5 @@
 # function: add_lunch_combo generic-eng
 #
 #
-add_lunch_combo cm_a500-eng
-add_lunch_combo cm_a500-userdebug
+add_lunch_combo aokp_a500-eng
+add_lunch_combo aokp_a500-userdebug
