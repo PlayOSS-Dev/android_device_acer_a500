@@ -30,7 +30,7 @@ on post-fs-data
     chown dhcp dhcp /data/misc/dhcp
 
     # we will remap this as /storage/sdcard0 with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
+    mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
     # Set indication (checked by vold) that we have finished this action
