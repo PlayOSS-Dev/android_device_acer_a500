@@ -1,1 +1,30 @@
-Device configuration for the acer iconia a500 (picasso)
+# AOKP (Android open kang project) JellyBean 4.1
+# ACER A500
+
+# How to build with my kernel & device config
+
+$ repo init -u https://github.com/AOKP/platform_manifest.git -b jb
+
+$ repo sync
+
+$ git clone git://github.com/PlayOSS-Dev/android_device_acer_a500.git -b aokp-jb device/acer/a500
+
+$ git clone git://github.com/PlayOSS-Dev/vendor_acer_a500.git vendor/acer/a500
+
+$ git clone git://github.com/PlayOSS-Dev/kernel_acer_a500.git kernel/acer/a500
+
+$ source build/envsetup.sh
+
+$ lunch aokp_a500-userdebug
+
+$ brunch a500
+
+# You can get the zipfile @out/target/product/a500/aokp_a500_unofficial_xxx.zip
+
+#
+# My Build is complete @ http://droidsans.com/node/98666
+
+Thanks
+_PJ_
+
+

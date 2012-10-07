@@ -52,6 +52,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # prebuilt configs
@@ -100,7 +101,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.opengles.version=131072 \
     dalvik.vm.heapstartsize=5m \
     dalvik.vm.heapgrowthlimit=64m \
-    dalvik.vm.heapsize=288m \
+    dalvik.vm.heapsize=256m \
     persist.sys.usb.config=mtp,adb \
     ro.sf.lcd_density=160 \
     ro.setupwizard.enterprise_mode=1 \
