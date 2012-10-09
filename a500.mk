@@ -28,7 +28,7 @@ PRODUCT_PACKAGES += \
     libtinyalsa \
     make_ext4fs \
     librs_jni \
-    setup_fs \
+    setup_fs 
 
 # ramdisk
 PRODUCT_COPY_FILES += \
@@ -57,6 +57,7 @@ PRODUCT_COPY_FILES += \
 
 # prebuilt configs
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/bin/ntfs-3g:system/xbin/ntfs-3g \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     $(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/prebuilt/etc/audio_effects.conf:system/etc/audio_effects.conf \
