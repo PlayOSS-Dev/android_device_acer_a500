@@ -106,7 +106,13 @@ PRODUCT_PROPERTY_OVERRIDES := \
     persist.sys.usb.config=mtp,adb \
     ro.sf.lcd_density=160 \
     ro.setupwizard.enterprise_mode=1 \
-    keyguard.no_require_sim=true
+    keyguard.no_require_sim=true \
+    hwui.render_dirty_regions=false \
+    hwui.disable_vsync=true \
+    ro.setupwizard.mode=OPTIONAL \
+    debug.sf.hw=1 \
+    pm.sleep_mode=1 \
+    windowsmgr.max_events_per_sec=150
 
 PRODUCT_PROPERTY_OVERRIDES += ro.dinfo.radio=Wifi
 PRODUCT_CHARACTERISTICS := tablet
