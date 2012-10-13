@@ -24,6 +24,7 @@ on early-init
 
 on fs
     mount_all /fstab.t20
+    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
     setprop ro.crypto.fuse_sdcard true
 
 on post-fs-data
