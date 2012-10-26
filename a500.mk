@@ -67,7 +67,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     $(LOCAL_PATH)/prebuilt/etc/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/prebuilt/etc/mixer_routes.xml:system/etc/mixer_routes.xml
+    $(LOCAL_PATH)/prebuilt/etc/mixer_routes.xml:system/etc/mixer_routes.xml \
+    $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg
 
 # keychars/layout
 PRODUCT_COPY_FILES += \
