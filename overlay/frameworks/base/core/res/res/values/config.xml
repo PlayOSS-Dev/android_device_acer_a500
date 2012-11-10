@@ -33,7 +33,10 @@
 
     <bool name="config_batterySdCardAccessibility">true</bool>
     
-   <bool name="config_allowAllRotations">true</bool>
+    <bool name="config_allowAllRotations">true</bool>
+
+  <!-- Device has a h/w rotation lock switch -->
+    <bool name="config_hasRotationLockSwitch">true</bool>
 
   <!-- Diable lockscreen rotation by default -->
     <bool name="config_enableLockScreenRotation">true</bool>
