@@ -43,10 +43,21 @@
         <value>816000</value>
         <value>912000</value>
         <value>1000000</value>
+        <value>1200000</value>
+        <value>1408000</value>
     </array>
     <item name="cpu.idle">20</item>
     <array name="cpu.active">
-        <value>100</value>
+      <value>100</value> 
+      <value>107</value> 
+      <value>116</value> 
+      <value>123</value> 
+      <value>135</value> 
+      <value>138</value> 
+      <value>142</value> 
+      <value>148</value> 
+      <value>154</value> 
+      <value>160</value> 
     </array>
     <item name="battery.capacity">3260</item>
 </device>

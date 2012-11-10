@@ -246,6 +246,11 @@ service nvcpud /system/bin/nvcpud
     user root
     group root
 
+service gsm /system/bin/sh /sbin/gsm
+    class main
+    user root
+    oneshot
+
 # Modules
     insmod /system/lib/modules/scsi_wait_scan.ko
 

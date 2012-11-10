@@ -20,22 +20,28 @@ $(call inherit-product-if-exists, vendor/acer/a500/a500-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     audio.a2dp.default \
+    audio.primary.tegra \
     libaudioutils \
     libtinyalsa \
     make_ext4fs \
     librs_jni \
-    setup_fs 
-
+    setup_fs \
+    tinymix \
+    tinyplay \
+    tinyrec 
+   
 # ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.usb.rc:root/init.picasso.usb.rc \
     $(LOCAL_PATH)/prebuilt/ramdisk/ueventd.picasso.rc:root/ueventd.picasso.rc \
     $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.rc:root/init.picasso.rc \
-    $(LOCAL_PATH)/prebuilt/ramdisk/fstab.t20:root/fstab.t20
+    $(LOCAL_PATH)/prebuilt/ramdisk/fstab.t20:root/fstab.t20 \
+    $(LOCAL_PATH)/prebuilt/gsm::root/sbin/gsm 
 
 # hw permissions
 PRODUCT_COPY_FILES += \
@@ -53,11 +59,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # prebuilt configs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/bin/ntfs-3g:system/xbin/ntfs-3g \
+    $(LOCAL_PATH)/prebuilt/bin/ntfs-3g:system/bin/ntfs-3g \
+    $(LOCAL_PATH)/prebuilt/bin/rild:system/bin/rild \
+    $(LOCAL_PATH)/prebuilt/libhuawei-ril.so:system/lib/libhuawei-ril.so \
     $(LOCAL_PATH)/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf \
     $(LOCAL_PATH)/prebuilt/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
@@ -67,9 +76,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     $(LOCAL_PATH)/prebuilt/etc/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/prebuilt/etc/mixer_routes.xml:system/etc/mixer_routes.xml \
-    $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg
-
+    $(LOCAL_PATH)/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg 
+    
 # keychars/layout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/usr/idc/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
