@@ -1,0 +1,10 @@
+bsdcomp 9
+deflate 9
+noauth
+debug
+usepeerdns
+noipdefault
+defaultroute
+persist
+maxfail 0
+holdoff 5

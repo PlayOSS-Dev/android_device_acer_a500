@@ -1,0 +1,26 @@
+#!/system/bin/sh
+
+#
+# hack to enable 3G connection.
+# pppd need to run as root, in fact pppd open /dev/ppp [1], and the kernel
+# module check for CAP_NET_ADMIN [2].
+# pppd is launched by rild and libhuawei-ril.so.
+# AOSP says rild is launched as root and then switch to radio [3].
+# On a stock asus rom, rild run a root.
+# A quick hack to work around this is to setuid pppd !
+# This script is called in a service (class core to be launched before rild)
+#
+# Question: what is the clean way here ?
+# rild has CAP_NET_ADMIN when it run as radio, but after a execve to pppd, those
+# capabilities are lost (or we have to add them to the file?).
+# A solution will be that rild lib contains pppd code (ie avoid exec)
+#
+# [1] external/ppp/pppd/sys-linux.c line 2022
+# [2] asus/tf101/drivers/net/ppp_generic.c line 368
+# [3] hardware/ril/rild/rild.c  line 87
+
+/system/bin/mount -o remount,rw /system
+
+/system/xbin/busybox chmod 4755 /system/bin/pppd
+
+/system/bin/mount -o remount,ro /system

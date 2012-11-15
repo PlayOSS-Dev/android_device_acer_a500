@@ -1,0 +1,16 @@
+/dev/ttyACM0
+115200
+nocrtscts
+nocdtrcts
+local
+usepeerdns
+defaultroute
+noipdefault
+ipcp-accept-local
+ipcp-accept-remote
+user cmnet
+password cmnet
+debug
+kdebug 7
+#connect "/usr/sbin/chat -v -t 50 -f /etc/ppp/chat/cmtc-isp"
+connect "/system/xbin/chat -v -t 500 -s -f /etc/ppp/gprs-connect-chat"

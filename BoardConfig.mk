@@ -42,19 +42,29 @@ BOARD_PAGE_SIZE := 0x00000800
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 
+BOARD_DATA_FILESYSTEM := ext4
+BOARD_SYSTEM_FILESYSTEM := ext4
+BOARD_CACHE_FILESYSTEM := ext4
+
 # Display
 USE_OPENGL_RENDERER    := true
 BOARD_EGL_CFG          := device/acer/a500/prebuilt/etc/egl.cfg
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 BOARD_HAS_NO_SELECT_BUTTON  := true
 BOARD_USE_SKIA_LCDTEXT := true
+BOARD_USES_HGL := true
+BOARD_USES_OVERLAY := true
 
 # Audio
 BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_TINY_AUDIO_HW := true
+#BOARD_USES_TINY_AUDIO_HW := true
+#BOARD_USES_ALSA_AUDIO := false
 
 # GPS
 BOARD_HAVE_GPS := true
+
+# RIL
+BOARD_USES_LEGACY_RIL := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -65,16 +75,17 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun/file"
 
 # Wireless
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := WEXT
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
-BOARD_WLAN_DEVICE                := bcm4329
-WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_NAME          := "bcm4329"
-WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/firmware/fw_bcm4329.bin nvram_path=/system/etc/wifi/bcmdhd.cal iface_name=wlan0"
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE := bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA := "/system/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_P2P := "/system/vendor/firmware/fw_bcmdhd_p2p.bin"
+WIFI_DRIVER_FW_PATH_AP := "/system/vendor/firmware/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/vendor/firmware/fw_bcmdhd.bin nvram_path=/system/etc/wifi/bcmdhd.cal iface_name=wlan0"
 
 # Partition
 BOARD_BOOTIMAGE_PARTITION_SIZE      := 8388608

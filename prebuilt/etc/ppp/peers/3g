@@ -1,0 +1,11 @@
+ttyUSB2
+921600
+crtscts
+defaultroute
+modem
+noauth
+noipdefault
+persist
+updetach
+usepeerdns
+connect 'chat "" AT OK ATD*99***1# CONNECT'

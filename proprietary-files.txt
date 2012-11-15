@@ -1,4 +1,5 @@
 bin/glgps_nvidiaTegra2android
+etc/asound.conf
 etc/firmware/bcm4329.hcd
 etc/firmware/nvmm_aacdec.axf
 etc/firmware/nvmm_adtsdec.axf
@@ -29,6 +30,7 @@ lib/hw/hwcomposer.tegra.so
 lib/hw/lights.picasso.so
 lib/hw/sensors.tegra.so
 lib/libardrv_dynamic.so
+lib/libasound.so
 lib/libcgdrv.so
 lib/libmllite.so
 lib/libmlplatform.so
@@ -81,3 +83,20 @@ lib/libnvwinsys.so
 lib/libnvwsi.so
 lib/libstagefrighthw.so
 lib/omxplayer.so
+usr/share/alsa/alsa.conf
+usr/share/alsa/cards/aliases.conf
+usr/share/alsa/pcm/center_lfe.conf
+usr/share/alsa/pcm/default.conf
+usr/share/alsa/pcm/dmix.conf
+usr/share/alsa/pcm/dpl.conf
+usr/share/alsa/pcm/dsnoop.conf
+usr/share/alsa/pcm/front.conf
+usr/share/alsa/pcm/iec958.conf
+usr/share/alsa/pcm/modem.conf
+usr/share/alsa/pcm/rear.conf
+usr/share/alsa/pcm/side.conf
+usr/share/alsa/pcm/surround40.conf
+usr/share/alsa/pcm/surround41.conf
+usr/share/alsa/pcm/surround50.conf
+usr/share/alsa/pcm/surround51.conf
+usr/share/alsa/pcm/surround71.conf
