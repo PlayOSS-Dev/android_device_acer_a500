@@ -29,7 +29,7 @@
     <bool name="config_voice_capable">false</bool>
 
     <!-- This device does not allow sms service. -->
-    <bool name="config_sms_capable">false</bool>
+    <bool name="config_sms_capable">true</bool>
 
     <bool name="config_batterySdCardAccessibility">true</bool>
     
@@ -97,16 +97,41 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Boolean indicating whether the wifi chipset has wifi direct support -->
-    <bool name="config_wifi_p2p_support">true</bool>
+    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
     <!-- Device type information conforming to Annex B format in WiFi Direct specification.
          The default represents a dual-mode smartphone -->
-    <string translatable="false" name="config_wifi_p2p_device_type">10-0050F204-4</string>
+    <string translatable="false" name="config_wifi_p2p_device_type">10-0050F204-5</string>
+
     <!-- Boolean indicating whether the wifi chipset supports background scanning mechanism.
          This mechanism allows the host to remain in suspend state and the dongle to actively
          scan and wake the host when a configured SSID is detected by the dongle. This chipset
          capability can provide power savings when wifi needs to be always kept on.
          The driver commands needed to support the feature are BGSCAN-START and BGSCAN-STOP -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+
+   <!-- Minimum screen brightness allowed by the power manager. -->
+    <integer name="config_screenBrightnessDim">10</integer>
+
+   <string-array translatable="false" name="config_tether_usb_regexs">
+	<item>"rndis0"</item>
+    </string-array>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable  Wifi interfaces. If the device doesn't want to support tethering over Wifi this  should be empty. An example would be "softap.*" -->
+    <string-array translatable="false" name="config_tether_wifi_regexs">
+        <item>"wlan0"</item>
+    </string-array>  
+    <string-array translatable="false" name="config_tether_bluetooth_regexs">
+        <item>"bnep\\d"</item>
+    </string-array>
+
+   <integer-array translatable="false" name="config_tether_upstream_types">
+        <item>0</item>
+        <item>1</item>
+        <item>5</item>
+        <item>7</item>  
+    </integer-array>
+
+
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N  1 zones as follows:
 
