@@ -199,4 +199,10 @@
 
    <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">5</integer>
+
+   <!-- Package name(s) containing location provider support -->
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <item>com.android.location.fused</item>
+        <item>com.google.android.location</item>
+    </string-array>
 </resources>
