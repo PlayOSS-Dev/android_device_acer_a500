@@ -194,4 +194,6 @@
          in pages of size (in KB) indicated by this value -->
     <integer name="config_cursorWindowSize">2048</integer>
     
+    <!-- Separate software navigation bar required on this device. -->             
+    <bool name="config_showNavigationBar">true</bool>
 </resources>
