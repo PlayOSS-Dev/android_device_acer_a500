@@ -237,12 +237,12 @@ service sdcard /system/bin/sdcard /data/media 1023 1023
     class late_start
 
 #BCM
-service hciattach /system/bin/brcm_patchram_plus --enable_hci --scopcm=0,2,0,0,0,0,0,0,0,0 \
-    --baudrate 3000000 --patchram /etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd --enable_lpm /dev/ttyHS2
-    class main
-    user root
-    group system bluetooth net_bt_admin misc
-    disabled
+#service hciattach /system/bin/brcm_patchram_plus --enable_hci --scopcm=0,2,0,0,0,0,0,0,0,0 \
+#    --baudrate 3000000 --patchram /etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd --enable_lpm /dev/ttyHS2
+#    class main
+#    user root
+#    group system bluetooth net_bt_admin misc
+#    disabled
 
 # Start GPS daemon
 service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsconfig.xml
