@@ -69,7 +69,6 @@ PRODUCT_COPY_FILES += \
 
 # prebuilt configs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/bin/ntfs-3g:system/bin/ntfs-3g \
     $(LOCAL_PATH)/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf \
     $(LOCAL_PATH)/prebuilt/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
@@ -79,12 +78,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg 
 
 # Huawei_3GUSB
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/lib/libhuawei-ril.so:system/lib/libhuawei-ril.so \
-    $(LOCAL_PATH)/prebuilt/bin/rild:system/bin/rild \
     $(LOCAL_PATH)/prebuilt/etc/init.d/02ppp.sh:system/etc/init.d/02ppp.sh \
     $(LOCAL_PATH)/prebuilt/etc/ppp/peers/3g:system/etc/ppp/peers/3g \
     $(LOCAL_PATH)/prebuilt/etc/ppp/peers/gprs:system/etc/ppp/peers/gprs \
