@@ -1,14 +1,18 @@
 #
 # system.prop for a500 
 #
+# 3GUSB
 rild.libpath=/system/lib/libhuawei-ril.so
 rild.libargs=-d /dev/ttyUSB2
 
-#
-# Acer a500 Hardware info 
-#
-ro.device.cpu=1 GHz NVIDIA Tegra 2 250 T20
-ro.device.gpu=NVIDIA ULP GeForce
-ro.device.rear_cam=5 MP
-ro.device.front_cam=2 MP
-ro.device.screen_res=1280x800
+ro.opengles.version=131072 
+dalvik.vm.heapstartsize=32m 
+dalvik.vm.heapgrowthlimit=64m 
+dalvik.vm.heapsize=384m 
+dalvik.vm.heaputilization=0.25 
+dalvik.vm.heapidealfree=8388608 
+dalvik.vm.heapconcurrentstart=2097152 
+persist.sys.usb.config=mtp,adb 
+ro.sf.lcd_density=160 
+ro.setupwizard.mode=OPTIONAL 
+windowsmgr.max_events_per_sec=275

@@ -20,7 +20,6 @@ $(call inherit-product-if-exists, vendor/acer/a500/a500-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
@@ -40,9 +39,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.usb.rc:root/init.picasso.usb.rc \
     $(LOCAL_PATH)/prebuilt/ramdisk/ueventd.picasso.rc:root/ueventd.picasso.rc \
     $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.rc:root/init.picasso.rc \
-    $(LOCAL_PATH)/prebuilt/ramdisk/fstab.t20:root/fstab.t20 \
-    $(LOCAL_PATH)/prebuilt/gsm::root/sbin/gsm 
-
+    $(LOCAL_PATH)/prebuilt/ramdisk/fstab.t20:root/fstab.picasso 
+    
 # firmware
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
@@ -67,8 +65,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml 
 
 # prebuilt configs
 PRODUCT_COPY_FILES += \
@@ -134,23 +131,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=30 \
-    ro.opengles.version=131072 \
-    dalvik.vm.heapstartsize=5m \
-    dalvik.vm.heapgrowthlimit=64m \
-    dalvik.vm.heapsize=256m \
-    persist.sys.usb.config=mtp,adb \
-    ro.sf.lcd_density=160 \
-    ro.setupwizard.enterprise_mode=1 \
-    keyguard.no_require_sim=true \
-    hwui.render_dirty_regions=false \
-    hwui.disable_vsync=true \
-    ro.setupwizard.mode=OPTIONAL \
-    debug.sf.hw=1 \
-    pm.sleep_mode=1 \
-    windowsmgr.max_events_per_sec=150
 
-PRODUCT_PROPERTY_OVERRIDES += ro.dinfo.radio=Wifi
 PRODUCT_CHARACTERISTICS := tablet
+
+# type
+PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_NAME := cm_a500
 PRODUCT_DEVICE := a500
