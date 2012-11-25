@@ -196,4 +196,7 @@
     
     <!-- Separate software navigation bar required on this device. -->             
     <bool name="config_showNavigationBar">true</bool>
+
+   <!--  Maximum number of supported users -->
+    <integer name="config_multiuserMaximumUsers">5</integer>
 </resources>
