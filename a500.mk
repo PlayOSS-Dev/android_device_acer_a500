@@ -20,6 +20,7 @@ $(call inherit-product-if-exists, vendor/acer/a500/a500-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
+$(call inherit-product-if-exists, framework/base/data/videos/VideoPackage2.mk)
 
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
@@ -132,6 +133,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_PROPERTY_OVERRIDES += ro.dinfo.radio=Wifi
 
 PRODUCT_CHARACTERISTICS := tablet
+
+# Bluetooth config file
+PRODUCT_COPY_FILES += \
+    system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 
 # type
 PRODUCT_TAGS += dalvik.gc.type-precise
