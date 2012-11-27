@@ -70,7 +70,7 @@ BOARD_USES_LEGACY_RIL := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/moto/wingray/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_PATH ?= device/acer/a500/bluetooth
 
 # USB 
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun/file"
