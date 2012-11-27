@@ -4,6 +4,18 @@
   <ctl name="Int Mic Switch" value="0" />
   <ctl name="Int Spk Switch" value="0" />
   <ctl name="Headphone Jack Switch" value="0" />
+  <ctl name="AUX Switch" value="0" />
+  <ctl name="OUT Playback Switch" value="0" />
+  <ctl name="OUT Channel Switch" value="0" />
+
+  <!-- This is the dock volume -->
+  <ctl name="OUT Playback Volume" value="32" />
+
+  <!-- This is the dock (line out) source -->
+  <ctl name="LOUT MIX DAC L1 Switch" value="0" />
+  <ctl name="LOUT MIX DAC R1 Switch" value="0" />
+  <ctl name="LOUT MIX OUTVOL L Switch" value="1" />
+  <ctl name="LOUT MIX OUTVOL R Switch" value="1" />
   <ctl name="Mic Jack Switch" value="0" />
   <ctl name="Right Speaker Mixer DACR Switch" value="1"/>
   <ctl name="Left Speaker Mixer DACL Switch" value="1"/>
@@ -25,6 +37,12 @@
   
   <path name="hdmi">
     <ctl name="Speaker Switch" value="0" />
+  </path>
+
+  <path name="dock">
+    <ctl name="AUX Switch" value="1" />
+    <ctl name="OUT Playback Switch" value="1" />
+    <ctl name="OUT Channel Switch" value="1" />
   </path>
 
   <path name="main-mic-top">
