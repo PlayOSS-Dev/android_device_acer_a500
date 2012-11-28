@@ -25,7 +25,6 @@ $(call inherit-product-if-exists, framework/base/data/videos/VideoPackage2.mk)
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     audio.a2dp.default \
-    audio.primary.picasso \
     libaudioutils \
     libtinyalsa \
     make_ext4fs \
@@ -79,7 +78,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-
+    $(LOCAL_PATH)/prebuilt/lib/hw/audio.primary.picasso.so:system/lib/hw/audio.primary.picasso.so  
+ 
 # Huawei_3GUSB
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/lib/libhuawei-ril.so:system/lib/libhuawei-ril.so \
