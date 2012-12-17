@@ -59,7 +59,6 @@ BOARD_USES_OVERLAY := true
 BOARD_USES_GENERIC_AUDIO := false
 #BOARD_USES_TINY_AUDIO_HW := true
 BOARD_USES_ALSA_AUDIO := false
-USE_PROPRIETARY_AUDIO_EXTENSIONS := true
 
 # GPS
 BOARD_HAVE_GPS := true
@@ -70,7 +69,7 @@ BOARD_HAVE_GPS := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_PATH ?= device/acer/a500/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/acer/a500/bluetooth
 
 # USB 
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun/file"
@@ -87,7 +86,7 @@ WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path
 WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_P2P          := "/system/vendor/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcmdhd_apsta.bin"
-#WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/firmware/fw_bcmdhd.bin nvram_path=/system/etc/wifi/bcmdhd.cal iface_name=wlan0"
+WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/firmware/fw_bcmdhd.bin nvram_path=/system/vendor/firmware/bcmdhd.cal iface_name=wlan0"
 
 # Partition
 BOARD_BOOTIMAGE_PARTITION_SIZE      := 8388608

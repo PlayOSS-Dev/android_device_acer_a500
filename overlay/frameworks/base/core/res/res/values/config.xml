@@ -38,7 +38,7 @@
   <!-- Device has a h/w rotation lock switch -->
     <bool name="config_hasRotationLockSwitch">true</bool>
 
-  <!-- Diable lockscreen rotation by default -->
+ <!-- Enable lockscreen rotation -->
     <bool name="config_enableLockScreenRotation">true</bool>
 
     <!-- XXXXX NOTE THE FOLLOWING RESOURCES USE THE WRONG NAMING CONVENTION.
@@ -56,7 +56,7 @@
     <string-array translatable="false" name="networkAttributes">
         <item>"wifi,1,1,1,-1,true"</item>
         <item>"bluetooth,7,7,0,-1,true"</item>
-        <item>"wifi_p2p,13,1,0,-1,false"</item>
+        <item>"wifi_p2p,13,1,0,-1,true"</item>
         <item>"bt_dun,14,14,2,-1,true"</item>
         <item>"ethernet,9,9,9,-1,true"</item>
     </string-array>
@@ -175,7 +175,7 @@
     <bool name="config_showNavigationBar">true</bool>
 
    <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">5</integer>
+    <integer name="config_multiuserMaximumUsers">8</integer>
 
    <!-- Package name(s) containing location provider support -->
     <string-array name="config_locationProviderPackageNames" translatable="false">
