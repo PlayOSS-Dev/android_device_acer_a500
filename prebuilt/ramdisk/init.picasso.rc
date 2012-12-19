@@ -45,6 +45,9 @@ on post-fs-data
     chown dhcp dhcp /data/misc/dhcp
     chmod 777 /data/misc/wifi/wpa_supplicant.conf
 
+    mkdir /data/gps 700 gps system
+    chown gps system /data/gps
+
     # we will remap this as /storage/sdcard0 with the sdcard fuse tool
     chown media_rw media_rw /data/media
 
@@ -53,7 +56,7 @@ on post-fs-data
 
 
 on boot
-# UART device
+    # UART device
     chmod 0660 /dev/ttyHS2
     chown bluetooth net_bt_stack /dev/ttyHS2
 
@@ -149,12 +152,6 @@ service wifimacwriter /system/bin/wifimacwriter
     chmod 0400 /sys/kernel/debug/binder/stats
     chmod 0400 /sys/kernel/debug/binder/state
 
-# Broadcom gps
-on property:ro.dinfo.radio=Wifi
-    write /sys/class/gpio/export 203
-    write /sys/class/gpio/gpio203/value 0
-    write /sys/class/gpio/gpio203/direction out
-
 # Ericsson MBM
 on property:ro.dinfo.radio=3G
     chown root root /dev/bus/usb/002/049
@@ -197,7 +194,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -aABKL
+service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
     class main
     disabled
     oneshot
@@ -212,12 +209,22 @@ service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL -f/system/etc/dhcpcd/dhcpcd.conf
+service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL -f/system/etc/dhcpcd/dhcpcd.conf
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_usb0 /system/bin/dhcpcd -ABDKL -f/system/etc/dhcpcd/dhcpcd.conf
     class main
     disabled
     oneshot
 
 service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_usb0 /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
@@ -251,18 +258,20 @@ service sdcard /system/bin/sdcard /data/media 1023 1023
 #    disabled
 
 # Start GPS daemon
+on boot
+  write /sys/class/gpio/export 203
+  write /sys/class/gpio/gpio203/value 0
+  write /sys/class/gpio/gpio203/direction out
+  chmod 0660 /sys/class/gpio/gpio203/value
+  chown gps gps /sys/class/gpio/gpio203/value
+  chown gps gps /sys/class/gpio/gpio203/value
+
 service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsconfig.xml
-    class late_start
-    user root
-    group root
+  class late_start
+  socket gps seqpacket 0660 gps system
+  user gps
+  group system inet sdcard_rw sdcard_r
 
-# bcm gps: fix permissions for jb compat
-on property:init.svc.gps-daemon=running
-    wait 2
-    chown gps system /dev/socket/gps
-    chmod 0660 /dev/socket/gps
-
-# Download lto data
 service bcmgps /system/bin/logwrapper /system/bin/bcmgps
     user root
     group root
@@ -284,6 +293,13 @@ service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
 on property:tf.enable=y
     mkdir /data/tf
     start tf_daemon
+
+# DOCK2 Setting & start service
+on boot
+    chmod 0660 /sys/dock/dock
+    chown system system /sys/dock/dock
+    chmod 0660 /sys/dock/dockin
+    chown system system /sys/dock/dockin
 
 # Enable NvCpuD, and set it to never poll config again
 on boot
