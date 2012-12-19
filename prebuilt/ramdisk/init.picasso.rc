@@ -272,6 +272,11 @@ service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsc
   user gps
   group system inet sdcard_rw sdcard_r
 
+on property:init.svc.gps-daemon=running
+    wait 2
+    chown gps system /dev/socket/gps
+    chmod 0660 /dev/socket/gps
+
 service bcmgps /system/bin/logwrapper /system/bin/bcmgps
     user root
     group root
