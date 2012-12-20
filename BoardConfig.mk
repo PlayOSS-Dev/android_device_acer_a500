@@ -70,6 +70,7 @@ BOARD_HAVE_GPS := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/acer/a500/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/acer/a500/bluetooth/bt_vendor.txt
 
 # USB 
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun/file"
