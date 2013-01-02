@@ -1,0 +1,28 @@
+# CM10.1 JellyBean 4.2
+# ACER A500
+
+# How to build with this kernel & device config
+
+$ repo init -u git://github.com/CyanogenMod/android.git -b cm-10.1
+
+$ repo sync
+
+$ git clone git://github.com/PlayOSS-Dev/android_device_acer_a500.git -b cm10.1 device/acer/a500
+
+$ git clone git://github.com/PlayOSS-Dev/vendor_acer_a500.git -b jellybean4.2 vendor/acer/a500
+
+$ git clone git://github.com/PlayOSS-Dev/kernel_acer_a500.git -b jellybean4.2 kernel/acer/a500
+
+$ source build/envsetup.sh
+
+$ lunch cm_a500-userdebug
+
+$ brunch a500
+
+# You will receive the zipfile here out/target/product/a500/cm10_a500_unofficial_xxx.zip
+
+
+Thanks
+_PJ_
+
+
