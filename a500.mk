@@ -26,17 +26,21 @@ WIFI_BAND := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
 PRODUCT_PACKAGES += \
+    librs_jni \
     com.android.future.usb.accessory \
     audio.a2dp.default \
+    audio.primary.picasso \
     libaudioutils \
     libtinyalsa \
     make_ext4fs \
     librs_jni \
     setup_fs \
+    liba2dp \
     tinymix \
     tinyplay \
-    tinyrec 
-   
+    tinycap \
+    tinyrec
+
 # ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.usb.rc:root/init.picasso.usb.rc \
@@ -80,8 +84,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/prebuilt/lib/hw/audio.primary.picasso.so:system/lib/hw/audio.primary.picasso.so
+    $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg \
+    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml 
 
 # Huawei_3GUSB
 PRODUCT_COPY_FILES += \
