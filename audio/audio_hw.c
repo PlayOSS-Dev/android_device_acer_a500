@@ -22,8 +22,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
 
 #include <cutils/log.h>
 #include <cutils/properties.h>
@@ -45,7 +43,7 @@
 #define PCM_DEVICE_HDMI 1
 #define PCM_DEVICE_SCO 2
 
-#define OUT_PERIOD_SIZE 1024
+#define OUT_PERIOD_SIZE 512
 #define OUT_SHORT_PERIOD_COUNT 2
 #define OUT_LONG_PERIOD_COUNT 8
 #define OUT_SAMPLING_RATE 44100
@@ -54,9 +52,9 @@
 #define IN_PERIOD_COUNT 4
 #define IN_SAMPLING_RATE 44100
 
-#define SCO_PERIOD_SIZE 1024
+#define SCO_PERIOD_SIZE 256
 #define SCO_PERIOD_COUNT 4
-#define SCO_SAMPLING_RATE 44100
+#define SCO_SAMPLING_RATE 8000
 
 /* minimum sleep time in out_write() when write threshold is not reached */
 #define MIN_WRITE_SLEEP_US 2000
@@ -178,7 +176,6 @@ static void release_buffer(struct resampler_buffer_provider *buffer_provider,
 
 static void select_devices(struct audio_device *adev)
 {
-    ALOGD("select_devices+");
     int headphone_on;
     int speaker_on;
     int docked_on;
@@ -216,7 +213,6 @@ static void select_devices(struct audio_device *adev)
 
     ALOGV("hp=%c speaker=%c dock=%c main-mic=%c, hdmi=%c", headphone_on ? 'y' : 'n',
           speaker_on ? 'y' : 'n', docked_on ? 'y' : 'n', main_mic_on ? 'y' : 'n', hdmi_on ? 'y' : 'n', headset_mic_on ? 'y' : 'n');
-    ALOGD("select_devices-");
 }
 
 /* must be called with hw device and output stream mutexes locked */
@@ -1233,23 +1229,6 @@ static int adev_close(hw_device_t *device)
     return 0;
 }
 
-static uint32_t adev_get_supported_devices(const struct audio_hw_device *dev)
-{
-    return (/* OUT */
-            AUDIO_DEVICE_OUT_SPEAKER |
-            AUDIO_DEVICE_OUT_WIRED_HEADSET |
-            AUDIO_DEVICE_OUT_WIRED_HEADPHONE |
-            AUDIO_DEVICE_OUT_AUX_DIGITAL |
-            AUDIO_DEVICE_OUT_ALL_SCO |
-            AUDIO_DEVICE_OUT_DEFAULT |
-            /* IN */
-            AUDIO_DEVICE_IN_BUILTIN_MIC |
-            AUDIO_DEVICE_IN_WIRED_HEADSET |
-            AUDIO_DEVICE_IN_BACK_MIC |
-            AUDIO_DEVICE_IN_ALL_SCO |
-            AUDIO_DEVICE_IN_DEFAULT);
-}
-
 static int adev_open(const hw_module_t* module, const char* name,
                      hw_device_t** device)
 {
@@ -1268,7 +1247,6 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.common.module = (struct hw_module_t *) module;
     adev->hw_device.common.close = adev_close;
 
-    adev->hw_device.get_supported_devices = adev_get_supported_devices;
     adev->hw_device.init_check = adev_init_check;
     adev->hw_device.set_voice_volume = adev_set_voice_volume;
     adev->hw_device.set_master_volume = adev_set_master_volume;

@@ -35,7 +35,7 @@
     <ctl name="OUT Channel Switch" value="1" />
   </path>
 
-  <path name="main-mic-right">
+  <path name="main-mic-top">
     <ctl name="Int Mic Switch" value="1" />
     <ctl name="HPF Switch" value="1"/>
     <ctl name="Right ADC Input" value="DMIC"/>
