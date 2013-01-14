@@ -16,3 +16,12 @@ persist.sys.usb.config=mtp,adb
 ro.sf.lcd_density=160 
 ro.setupwizard.mode=OPTIONAL 
 windowsmgr.max_events_per_sec=275
+
+#
+# Acer a500 Hardware info
+#
+ro.device.cpu=1 GHz NVIDIA Tegra 2 250 T20
+ro.device.gpu=NVIDIA ULP GeForce
+ro.device.rear_cam=5 MP
+ro.device.front_cam=2 MP
+ro.device.screen_res=1280x800

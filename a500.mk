@@ -85,7 +85,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml 
+    $(LOCAL_PATH)/libaudio/mixer_paths.xml:system/etc/mixer_paths.xml 
 
 # Huawei_3GUSB
 PRODUCT_COPY_FILES += \
@@ -148,7 +148,7 @@ PRODUCT_COPY_FILES += \
 # type
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-PRODUCT_NAME := cm_a500
+PRODUCT_NAME := aokp_a500
 PRODUCT_DEVICE := a500
 PRODUCT_BRAND := acer
 PRODUCT_MODEL := a500
