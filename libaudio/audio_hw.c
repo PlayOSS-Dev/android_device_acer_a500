@@ -178,7 +178,7 @@ static void select_devices(struct audio_device *adev)
 {
     int headphone_on;
     int speaker_on;
-    int docked_on;
+    int docked;
     int main_mic_on;
     int hdmi_on;
     int headset_mic_on;
@@ -187,7 +187,7 @@ static void select_devices(struct audio_device *adev)
                                     AUDIO_DEVICE_OUT_WIRED_HEADPHONE);
     speaker_on = adev->out_device & AUDIO_DEVICE_OUT_SPEAKER;
     main_mic_on = adev->in_device & AUDIO_DEVICE_IN_BUILTIN_MIC;
-    docked_on = adev->out_device & AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET;
+    docked = adev->out_device & AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET;
     hdmi_on = adev->out_device & AUDIO_DEVICE_OUT_AUX_DIGITAL;
 
     reset_mixer_state(adev->ar);
@@ -196,7 +196,7 @@ static void select_devices(struct audio_device *adev)
         audio_route_apply_path(adev->ar, "speaker");
     if (headphone_on)
         audio_route_apply_path(adev->ar, "headphone");
-    if (docked_on)
+    if (docked)
         audio_route_apply_path(adev->ar, "dock");
     if (hdmi_on)
         audio_route_apply_path(adev->ar, "hdmi");
@@ -212,7 +212,7 @@ static void select_devices(struct audio_device *adev)
     update_mixer_state(adev->ar);
 
     ALOGV("hp=%c speaker=%c dock=%c main-mic=%c, hdmi=%c", headphone_on ? 'y' : 'n',
-          speaker_on ? 'y' : 'n', docked_on ? 'y' : 'n', main_mic_on ? 'y' : 'n', hdmi_on ? 'y' : 'n', headset_mic_on ? 'y' : 'n');
+          speaker_on ? 'y' : 'n', docked ? 'y' : 'n', main_mic_on ? 'y' : 'n', hdmi_on ? 'y' : 'n', headset_mic_on ? 'y' : 'n');
 }
 
 /* must be called with hw device and output stream mutexes locked */
