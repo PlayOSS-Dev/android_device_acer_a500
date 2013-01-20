@@ -22,7 +22,7 @@
 <resources>
 
     <!-- Software blur is too slow on this device. -->
-    <bool name="config_sf_slowBlur">true</bool>
+    <!--<bool name="config_sf_slowBlur">true</bool>-->
 
   <!--  <string name="config_datause_iface">wlan0</string> -->
     <!-- This device is not "voice capable"; it's data-only. -->
@@ -197,6 +197,9 @@
 
    <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">8</integer>
+
+   <!-- Treat the on screen buttons as hardware keys? -->
+    <integer name="config_deviceHardwareKeys">7</integer>
 
    <!-- Package name(s) containing location provider support -->
     <string-array name="config_locationProviderPackageNames" translatable="false">
