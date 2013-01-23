@@ -39,7 +39,8 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinyplay \
     tinycap \
-    tinyrec
+    tinyrec \
+    Torch
 
 # ramdisk
 PRODUCT_COPY_FILES += \

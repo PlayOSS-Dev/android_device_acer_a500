@@ -17,11 +17,8 @@ etc/firmware/nvmm_wavdec.axf
 etc/firmware/nvmm_wmadec.axf
 etc/firmware/nvmm_wmaprodec.axf
 etc/firmware/nvrm_avp.bin
-lib/egl/libEGL_perfhud.so
 lib/egl/libEGL_tegra.so
-lib/egl/libGLESv1_CM_perfhud.so
 lib/egl/libGLESv1_CM_tegra.so
-lib/egl/libGLESv2_perfhud.so
 lib/egl/libGLESv2_tegra.so
 lib/hw/camera.tegra.so
 lib/hw/gps.tegra.so
