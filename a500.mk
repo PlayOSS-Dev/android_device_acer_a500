@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     audio.primary.picasso \
     libaudioutils \
     libtinyalsa \
+    libnetcmdiface \
     make_ext4fs \
     librs_jni \
     setup_fs \
