@@ -40,7 +40,8 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap \
     tinyrec \
-    Torch
+    Torch \
+    rild
 
 # ramdisk
 PRODUCT_COPY_FILES += \
@@ -146,8 +147,17 @@ PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 
-# type
+# we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dexopt-data-only=1 \
+    dalvik.vm.heapstartsize=8m \
+    dalvik.vm.heapgrowthlimit=96m \
+    dalvik.vm.heapsize=384m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=8m
 
 PRODUCT_NAME := cm_a500
 PRODUCT_DEVICE := a500
