@@ -51,9 +51,9 @@ BOARD_CACHE_FILESYSTEM := ext4
 USE_OPENGL_RENDERER    := true
 BOARD_EGL_CFG          := device/acer/a500/prebuilt/etc/egl.cfg
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
-BOARD_USE_SKIA_LCDTEXT := true
-BOARD_USES_HGL := true
-BOARD_USES_OVERLAY := true
+# BOARD_USE_SKIA_LCDTEXT := true
+# BOARD_USES_HGL := true
+# BOARD_USES_OVERLAY := true
 BOARD_EGL_NEEDS_LEGACY_FB := true
 
 # Audio
