@@ -1,0 +1,349 @@
+From 6b0eb465d10498a6c565f26d71436a818a75c5ae Mon Sep 17 00:00:00 2001
+From: Bernd Giesecke <bernd@giesecke.tk>
+Date: Sat, 2 Feb 2013 01:33:23 +0900
+Subject: [PATCH] Added switch for Phone UI and Tablet UI in settings. Thanks
+ to SGT7
+
+Change-Id: Ic3efc9550bab4bf4ab064a80f7c82273d0830a90
+---
+ core/java/android/provider/Settings.java           |   14 ++++++
+ .../src/com/android/systemui/SystemUIService.java  |   46 ++++++++++++++++++
+ .../android/systemui/statusbar/BaseStatusBar.java  |   49 ++++++++++++++++++++
+ .../systemui/statusbar/phone/PhoneStatusBar.java   |   12 ++++-
+ .../systemui/statusbar/policy/DateView.java        |   11 +++++
+ .../internal/policy/impl/PhoneWindowManager.java   |   46 +++++++++++++++---
+ .../android/server/wm/WindowManagerService.java    |   16 +++++--
+ 7 files changed, 184 insertions(+), 10 deletions(-)
+
+diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
+index a0802b4..bc95b5c 100644
+--- a/core/java/android/provider/Settings.java
++++ b/core/java/android/provider/Settings.java
+@@ -3091,6 +3091,20 @@ public static void setShowGTalkServiceStatusForUser(ContentResolver cr, boolean
+           */
+          public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+ 
++         /**
++          * Forward Port Tablet UI toggle
++          * TODO: Fix DateView
++          * Original Patch by Scott Brady <sbradymobile@gmail.com>
++          * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++         */
++         /**
++          * @hide
++         */
++         public static final String TABLET_MODE = "tablet_mode";
++         /**
++          * Port end
++         */
++
+         /**
+          * Settings to backup. This is here so that it's in the same place as the settings
+          * keys and easy to update.
+diff --git a/packages/SystemUI/src/com/android/systemui/SystemUIService.java b/packages/SystemUI/src/com/android/systemui/SystemUIService.java
+index 18bedf1..cfdc7fc 100644
+--- a/packages/SystemUI/src/com/android/systemui/SystemUIService.java
++++ b/packages/SystemUI/src/com/android/systemui/SystemUIService.java
+@@ -18,10 +18,23 @@
+ 
+ import java.io.FileDescriptor;
+ import java.io.PrintWriter;
++import java.lang.Object;
++import java.lang.System;
+ 
+ import android.app.Service;
+ import android.content.BroadcastReceiver;
+ import android.content.Context;
++/**
++ * Forward Port Tablet UI toggle
++ * TODO: Fix DateView
++ * Original Patch by Scott Brady <sbradymobile@gmail.com>
++ * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++ */
++import android.content.ContentResolver;
++import android.provider.Settings;
++/**
++ * Port end
++ */
+ import android.content.Intent;
+ import android.content.pm.PackageManager;
+ import android.content.res.Configuration;
+@@ -38,6 +51,17 @@
+     static final String TAG = "SystemUIService";
+ 
+     /**
++     * Forward Port Tablet UI toggle
++     * TODO: Fix DateView
++     * Original Patch by Scott Brady <sbradymobile@gmail.com>
++     * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++     */
++    Context context = this;
++    /**
++     * Port end
++     */
++
++    /**
+      * The class names of the stuff to start.
+      */
+     final Object[] SERVICES = new Object[] {
+@@ -73,6 +97,24 @@ public void onCreate() {
+         AccessibilityManager.createAsSharedAcrossUsers(this);
+ 
+         // Pick status bar or system bar.
++        /**
++         * Forward Port Tablet UI toggle
++         * TODO: Fix DateView
++         * Original Patch by Scott Brady <sbradymobile@gmail.com>
++         * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++         */
++
++        String tableModeProgrammed = System.getProperty("table_mode");
++        if (tableModeProgrammed == "1") {
++            Settings.System.putInt(getContentResolver(), Settings.System.TABLET_MODE,1);
++        }
++        boolean tabletModeOverride = (Settings.System.getInt(
++            context.getContentResolver(),
++            Settings.System.TABLET_MODE, 0) == 1);
++        SERVICES[0] = tabletModeOverride
++            ? R.string.config_systemBarComponent
++            : R.string.config_statusBarComponent;
++        /*
+         IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+         try {
+             SERVICES[0] = wm.hasSystemNavBar()
+@@ -81,6 +123,10 @@ public void onCreate() {
+         } catch (RemoteException e) {
+             Slog.w(TAG, "Failing checking whether status bar can hide", e);
+         }
++        */
++        /**
++         * Port end
++         */
+ 
+         final int N = SERVICES.length;
+         mServices = new SystemUI[N];
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java
+index 67a8061..40e76f2 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java
+@@ -38,6 +38,16 @@
+ import android.app.PendingIntent;
+ import android.app.TaskStackBuilder;
+ import android.content.ActivityNotFoundException;
++/**
++ * Forward Port Tablet UI toggle
++ * TODO: Fix DateView
++ * Original Patch by Scott Brady <sbradymobile@gmail.com>
++ * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++ */
++import android.content.ContentResolver;
++/**
++ * Port end
++ */
+ import android.content.BroadcastReceiver;
+ import android.content.Context;
+ import android.content.Intent;
+@@ -196,6 +206,17 @@ public boolean onClickHandler(View view, PendingIntent pendingIntent, Intent fil
+     };
+ 
+     public void start() {
++        /**
++         * Forward Port Tablet UI toggle
++         * TODO: Fix DateView
++         * Original Patch by Scott Brady <sbradymobile@gmail.com>
++         * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++         */
++        SettingsObserver observer = new SettingsObserver(mHandler);
++        observer.observe(mContext);
++        /**
++         * Port end
++         */
+         mWindowManager = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+         mWindowManagerService = WindowManagerGlobal.getWindowManagerService();
+         mDisplay = mWindowManager.getDefaultDisplay();
+@@ -1157,4 +1178,32 @@ public boolean inKeyguardRestrictedInputMode() {
+         KeyguardManager km = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+         return km.inKeyguardRestrictedInputMode();
+     }
++    /**
++     * Forward Port Tablet UI toggle
++     * TODO: Fix DateView
++     * Original Patch by Scott Brady <sbradymobile@gmail.com>
++     * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++     */
++    private static class SettingsObserver extends ContentObserver {
++        private Handler mHandler;
++
++        SettingsObserver(Handler handler) {
++            super(handler);
++            mHandler = handler;
++        }
++
++        void observe(Context context) {
++            ContentResolver resolver = context.getContentResolver();
++            resolver.registerContentObserver(Settings.System.getUriFor(
++                Settings.System.TABLET_MODE), false, this);
++        }
++
++        @Override
++        public void onChange(boolean selfChange) {
++            android.os.Process.killProcess(android.os.Process.myPid());
++        }
++    };
++    /**
++     * Port end
++     */
+ }
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
+index 26972c4..dea7d62 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
+@@ -1296,7 +1296,17 @@ public void onAnimationEnd(Animator _a) {
+     public void showClock(boolean show) {
+         if (mStatusBarView == null) return;
+         ContentResolver resolver = mContext.getContentResolver();
+-        View clock = mStatusBarView.findViewById(R.id.clock);
++        /**
++         * Forward Port Tablet UI toggle
++         * TODO: Fix DateView
++         * Original Patch by Scott Brady <sbradymobile@gmail.com>
++         * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++         */
++        // View clock = mStatusBarView.findViewById(R.id.clock);
++        TextView clock = (TextView) mStatusBarView.findViewById(R.id.clock);
++        /**
++         * Port end
++         */
+         mShowClock = (Settings.System.getInt(resolver,
+                 Settings.System.STATUS_BAR_CLOCK, 1) == 1);
+         if (clock != null) {
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/DateView.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/DateView.java
+index 26b1eb2..8bb065c 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/DateView.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/DateView.java
+@@ -85,6 +85,13 @@ protected void onDetachedFromWindow() {
+         setUpdates();
+     }
+ 
++    /**
++     * Forward Port Tablet UI toggle
++     * TODO: Fix DateView
++     * Original Patch by Scott Brady <sbradymobile@gmail.com>
++     * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++     */
++    /*
+     @Override
+     protected void onDraw(Canvas canvas) {
+         if (mParent == null) {
+@@ -95,6 +102,10 @@ protected void onDraw(Canvas canvas) {
+ 
+         super.onDraw(canvas);
+     }
++    */
++    /**
++     * Port end
++     */
+ 
+     @Override
+     protected void onWindowVisibilityChanged(int visibility) {
+diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+index 7f08e7b..5b1a721 100755
+--- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
++++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+@@ -657,6 +657,17 @@ void observe() {
+                     Settings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION), false, this);
+             resolver.registerContentObserver(Settings.System.getUriFor(
+                     Settings.System.HARDWARE_KEY_REBINDING), false, this);
++            /**
++             * Forward Port Tablet UI toggle
++             * TODO: Fix DateView
++             * Original Patch by Scott Brady <sbradymobile@gmail.com>
++             * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++             */
++            resolver.registerContentObserver(Settings.System.getUriFor(
++                Settings.System.TABLET_MODE), false, this);
++            /**
++             * Port end
++             */
+ 
+             updateSettings();
+         }
+@@ -1287,6 +1298,31 @@ public void setInitialDisplaySize(Display display, int width, int height, int de
+         // SystemUI (status bar) layout policy
+         int shortSizeDp = shortSize * DisplayMetrics.DENSITY_DEFAULT / density;
+ 
++        /**
++         * Forward Port Tablet UI toggle
++         * TODO: Fix DateView
++         * Original Patch by Scott Brady <sbradymobile@gmail.com>
++         * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++         */
++        ContentResolver resolver = mContext.getContentResolver();
++        boolean tabletModeOverride = Settings.System.getInt(resolver,
++            Settings.System.TABLET_MODE, 0) == 1;
++
++        if (shortSizeDp < 600 && !tabletModeOverride) {
++            // 0-599dp: "phone" UI with a separate status & navigation bar
++            mHasSystemNavBar = false;
++            mNavigationBarCanMove = true;
++//        } else if (shortSizeDp < 720 && !tabletModeOverride) {
++        } else if (!tabletModeOverride) {
++            // 600+dp: "phone" UI with modifications for larger screens
++            mHasSystemNavBar = false;
++            mNavigationBarCanMove = false;
++        } else {
++            // forced "tablet" UI with a single combined status & navigation bar
++            mHasSystemNavBar = true;
++            mNavigationBarCanMove = false;
++        }
++        /*
+         if (shortSizeDp < 600) {
+             // 0-599dp: "phone" UI with a separate status & navigation bar
+             mHasSystemNavBar = false;
+@@ -1296,12 +1332,10 @@ public void setInitialDisplaySize(Display display, int width, int height, int de
+             mHasSystemNavBar = false;
+             mNavigationBarCanMove = false;
+         }
+-//        else {
+-//            // 720dp: "tablet" UI with a single combined status & navigation bar
+-//            // patch from barrmulio @ XDA ==> http://forum.xda-developers.com/showpost.php?p=28957307&postcount=1
+-//            mHasSystemNavBar = true;
+-//            mNavigationBarCanMove = false;
+-//        }
++        */
++        /**
++         * Port end
++         */
+ 
+         if (!mHasSystemNavBar) {
+             mHasNavigationBar = mContext.getResources().getBoolean(
+diff --git a/services/java/com/android/server/wm/WindowManagerService.java b/services/java/com/android/server/wm/WindowManagerService.java
+index 5bcc78e..6f4ec59 100755
+--- a/services/java/com/android/server/wm/WindowManagerService.java
++++ b/services/java/com/android/server/wm/WindowManagerService.java
+@@ -6848,9 +6848,19 @@ private void computeSizeRangesAndScreenLayout(DisplayInfo displayInfo, boolean r
+         sl = reduceConfigLayout(sl, Surface.ROTATION_90, density, unrotDh, unrotDw);
+         sl = reduceConfigLayout(sl, Surface.ROTATION_180, density, unrotDw, unrotDh);
+         sl = reduceConfigLayout(sl, Surface.ROTATION_270, density, unrotDh, unrotDw);
+-        // patch from barrmulio @ XDA ==> http://forum.xda-developers.com/showpost.php?p=28957307&postcount=1
+-        outConfig.smallestScreenWidthDp = (int)(displayInfo.smallestNominalAppWidth / density);
+-        // outConfig.smallestScreenWidthDp = 721;
++        /**
++         * Forward Port Tablet UI toggle
++         * TODO: Fix DateView
++         * Original Patch by Scott Brady <sbradymobile@gmail.com>
++         * Change-Id: Ibc688afd5e643165a2ceeba9f832ed50e6af3715
++         */
++        boolean forceTablet = Settings.System.getInt(mContext.getContentResolver(),
++            Settings.System.TABLET_MODE, 0) == 1 && (int)(displayInfo.smallestNominalAppWidth/ density) < 720;
++        outConfig.smallestScreenWidthDp = forceTablet ? 721 : (int)(displayInfo.smallestNominalAppWidth / density);
++        // outConfig.smallestScreenWidthDp = (int)(displayInfo.smallestNominalAppWidth / density);
++        /**
++         * Port end
++         */
+         outConfig.screenLayout = sl;
+     }
+ 
+-- 
+1.7.10
+
