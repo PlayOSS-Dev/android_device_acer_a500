@@ -266,7 +266,6 @@ on boot
   write /sys/class/gpio/gpio203/direction out
   chmod 0660 /sys/class/gpio/gpio203/value
   chown gps gps /sys/class/gpio/gpio203/value
-  chown gps gps /sys/class/gpio/gpio203/value
 
 service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsconfig.xml
   class late_start
