@@ -83,6 +83,7 @@ on boot
 
 # backlight
     chown system system /sys/class/backlight/pwm-backlight/brightness
+    chmod 0666 /sys/class/backlight/pwm-backlight/brightness
 
 # Notification
     chown system system /sys/EcControl/HomekeyLED
@@ -284,14 +285,4 @@ on boot
     chown system system /sys/dock/dock
     chmod 0660 /sys/dock/dockin
     chown system system /sys/dock/dockin
-
-# Enable NvCpuD, and set it to never poll config again
-on boot
-    setprop nvcpud.enabled true
-    setprop nvcpud.refresh_ms -1
-
-service nvcpud /system/bin/nvcpud
-    class main
-    user root
-    group root
 
