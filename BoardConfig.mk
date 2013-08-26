@@ -41,6 +41,8 @@ BOARD_PAGE_SIZE := 0x00000800
 # Recovery
 #TARGET_PREBUILT_RECOVERY_KERNEL := device/acer/a500/prebuilt/ramdisk/recovery_kernel
 #TARGET_RECOVERY_FSTAB := device/acer/a500/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/acer/a500/prebuilt/ramdisk/fstab.picasso
+RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 
