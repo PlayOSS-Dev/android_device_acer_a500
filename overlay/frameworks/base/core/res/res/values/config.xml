@@ -107,7 +107,7 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Boolean indicating whether the wifi chipset has wifi direct support -->
-    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
+    <!-- <bool translatable="false" name="config_wifi_p2p_support">true</bool> -->
     <!-- Device type information conforming to Annex B format in WiFi Direct specification.
          The default represents a dual-mode smartphone -->
     <string translatable="false" name="config_wifi_p2p_device_type">10-0050F204-4</string>
