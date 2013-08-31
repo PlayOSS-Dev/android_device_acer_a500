@@ -1,0 +1,11 @@
+/system ext4 /dev/block/mmcblk0p3
+/data ext4 /dev/block/mmcblk0p8
+/cache ext4 /dev/block/mmcblk0p4
+/misc emmc /dev/block/mmcblk0p5
+/flexrom ext4 /dev/block/mmcblk0p6   flags=display="Flex ROM";backup=1;wipeingui
+/sdcard vfat /dev/block/mmcblk1p1 /dev/block/mmcblk1p1   flags=display="Micro SDcard";storage;wipeingui;removable
+/boot emmc /dev/block/mmcblk0p2
+/recovery emmc /dev/block/mmcblk0p1
+/sd-ext ext4 /dev/block/mmcblk1p2 /dev/block/mmcblk1p2
+/usb_storage vfat /dev/block/sda1 /dev/block/sda  flags=display="USB_STORAGE";storage;wipeingui;removable
+

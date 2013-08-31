@@ -7,26 +7,30 @@ on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /storage/usbdisk0 0000 system system
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export SECONDARY_STORAGE /storage/sdcard1
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
-    # for backwards compatibility
-    symlink /storage/emulated/legacy /sdcard  
-    symlink /storage/emulated/legacy /mnt/sdcard  
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
-    # make the pathes for the external media mounts
-    mkdir /storage/sdcard1 0000 system system
-    mkdir /storage/usbdisk0 0000 system system
 
     symlink /storage/sdcard1 /mnt/external_sd
     symlink /storage/usbdisk0 /mnt/usb_storage
     symlink /storage/sdcard1 /external_sd
     symlink /storage/usbdisk0 /usb_storage
+
+
+    # Save bugreports as owner
+    export BUGREPORT_WRITE_PATH /mnt/shell/sdcard0/0
+    export BUGREPORT_READ_PATH /storage/sdcard0
 
     # Create mountpoint so Dalvik can mark as slave in zygotes.
     # mount tmpfs tmpfs /storage mode=0050,uid=0,gid=1028
@@ -48,11 +52,8 @@ on post-fs-data
     chown dhcp dhcp /data/misc/dhcp
     chmod 777 /data/misc/wifi/wpa_supplicant.conf
 
-    mkdir /data/gps 700 gps system
-    chown gps system /data/gps
-
     # we will remap this as /storage/sdcard0 with the sdcard fuse tool
-    chown media_rw media_rw /data/media
+    #chown media_rw media_rw /data/media
 
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
@@ -83,6 +84,7 @@ on boot
 
 # backlight
     chown system system /sys/class/backlight/pwm-backlight/brightness
+    chmod 0666 /sys/class/backlight/pwm-backlight/brightness
 
 # Notification
     chown system system /sys/EcControl/HomekeyLED
@@ -104,6 +106,9 @@ on boot
     chmod 666 /dev/nvhost-vi
     chmod 664 /sys/bus/iio/devices/device0/lux
     chmod 664 /sys/bus/iio/devices/device0/proxim_ir
+
+# 4.3 requires
+    chmod 0644 /proc/cmdline
 
 # Power management settings
     # cpufreq defaults
@@ -192,7 +197,7 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
     disabled
     oneshot
 
-service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
@@ -226,10 +231,20 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service iprenew_bnep0 /system/bin/dhcpcd -n
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+# bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys.
+# bugtogo.sh tool will invoke bugreport and propt email composer
+# if not in user build.
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport \
+        -b /system/media/audio/ui/Dock.ogg -e /system/media/audio/ui/Undock.ogg
     class main
     disabled
     oneshot
+    keycodes 115 114
 
 # create virtual SD card at /storage/sdcard0, based on the /data/media directory
 # deamon will drop to user/group system/media_rw after initializing
@@ -237,19 +252,40 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
 service sdcard /system/bin/sdcard /data/media 1023 1023
     class late_start
 
-# Start GPS daemon
-on boot
-  write /sys/class/gpio/export 203
-  write /sys/class/gpio/gpio203/value 0
-  write /sys/class/gpio/gpio203/direction out
-  chmod 0660 /sys/class/gpio/gpio203/value
-  chown gps gps /sys/class/gpio/gpio203/value
+# Force download of long term orbit data (lto.dat)
+service gps-lto-dat /system/bin/logwrapper /system/bin/gps-update
+    user root
+    group root
+    disabled
+    oneshot
 
-service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsconfig.xml
-  class late_start
+on property:init.svc.wpa_supplicant=running
+    start gps-lto-dat	
+
+on property:init.svc.p2p_supplicant=running
+    start gps-lto-dat
+
+#GPS
+    mkdir /data/gps
+    chown system system /data/gps
+    chmod 770 /data/gps
+    chown root system /dev/ttyHS1
+    chmod 0664 /dev/ttyHS1
+
+# GPS init
+    write /sys/class/gpio/export 203
+    write /sys/class/gpio/gpio203/value 0
+    write /sys/class/gpio/gpio203/direction out
+    chown root system /sys/class/gpio/gpio203/value
+    chmod 0664 /sys/class/gpio/gpio203/value
+
+# Start GPS daemon
+  on boot
+  service gps-daemon /system/bin/glgps_nvidiaTegra2android -c /system/etc/gps/gpsconfig.xml
   socket gps seqpacket 0660 gps system
   user gps
-  group system inet sdcard_rw sdcard_r
+  group system inet 
+  class late_start
 
 on property:init.svc.gps-daemon=running
     wait 2
@@ -284,14 +320,4 @@ on boot
     chown system system /sys/dock/dock
     chmod 0660 /sys/dock/dockin
     chown system system /sys/dock/dockin
-
-# Enable NvCpuD, and set it to never poll config again
-on boot
-    setprop nvcpud.enabled true
-    setprop nvcpud.refresh_ms -1
-
-service nvcpud /system/bin/nvcpud
-    class main
-    user root
-    group root
 

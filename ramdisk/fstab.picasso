@@ -18,4 +18,3 @@
 # vold-managed volumes ("block device" is actually a sysfs devpath)
 /devices/platform/sdhci-tegra.2/mmc_host/mmc1 /storage/sdcard1 auto default voldmanaged=sdcard:auto
 /devices/platform/tegra-ehci.2 /storage/usbdisk0 auto default voldmanaged=sda:auto
-
