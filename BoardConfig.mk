@@ -37,11 +37,11 @@ TARGET_PREBUILT_KERNEL := device/acer/a500/prebuilt/kernel
 BOARD_KERNEL_CMDLINE :=
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_PAGE_SIZE := 0x00000800
-
 # Recovery
-#TARGET_PREBUILT_RECOVERY_KERNEL := device/acer/a500/prebuilt/ramdisk/recovery_kernel
-#TARGET_RECOVERY_FSTAB := device/acer/a500/recovery.fstab
-TARGET_RECOVERY_FSTAB := device/acer/a500/prebuilt/ramdisk/fstab.picasso
+#TARGET_RECOVERY_KERNEL := device/acer/a500/recovery/recovery_kernel
+#TARGET_RECOVERY_INITRC := device/acer/a500/recovery/init.recovery.rc
+#TARGET_RECOVERY_FSTAB := device/acer/a500/recovery/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/acer/a500/ramdisk/fstab.picasso
 RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_HAS_LARGE_FILESYSTEM := true

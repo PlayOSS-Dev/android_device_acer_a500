@@ -50,10 +50,10 @@ PRODUCT_PACKAGES += \
 
 # ramdisk
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.usb.rc:root/init.picasso.usb.rc \
-    $(LOCAL_PATH)/prebuilt/ramdisk/ueventd.picasso.rc:root/ueventd.picasso.rc \
-    $(LOCAL_PATH)/prebuilt/ramdisk/init.picasso.rc:root/init.picasso.rc \
-    $(LOCAL_PATH)/prebuilt/ramdisk/fstab.picasso:root/fstab.picasso 
+    $(LOCAL_PATH)/ramdisk/init.picasso.usb.rc:root/init.picasso.usb.rc \
+    $(LOCAL_PATH)/ramdisk/ueventd.picasso.rc:root/ueventd.picasso.rc \
+    $(LOCAL_PATH)/ramdisk/init.picasso.rc:root/init.picasso.rc \
+    $(LOCAL_PATH)/ramdisk/fstab.picasso:root/fstab.picasso 
     
 # firmware
 PRODUCT_COPY_FILES += \
