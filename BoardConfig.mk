@@ -100,3 +100,15 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE    := 1283457024
 BOARD_USERDATAIMAGE_PARTITION_SIZE  := 13950255104
 BOARD_FLASH_BLOCK_SIZE              := 131072
 
+# SELinux policies
+HAVE_SELINUX := true
+
+BOARD_SEPOLICY_DIRS := \
+   device/acer/a500/selinux
+
+BOARD_SEPOLICY_UNION := \
+   file_contexts \
+   file.te \
+   device.te \
+   domain.te
+
