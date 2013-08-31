@@ -62,6 +62,26 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/vendor/firmware/BCM4329B1_002.002.023.0797.0863.hcd:system/etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd \
     $(LOCAL_PATH)/prebuilt/bin/wifimacwriter:system/bin/wifimacwriter \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf 
+
+# usbnet modules
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/lib/modules/asix.ko:system/lib/modules/asix.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/catc.ko:system/lib/modules/catc.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/cx82310_eth.ko:system/lib/modules/cx82310_eth.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/dm9601.ko:system/lib/modules/dm9601.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/int51x1.ko:system/lib/modules/int51x1.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/kalmia.ko:system/lib/modules/kalmia.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/kaweth.ko:system/lib/modules/kaweth.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/mcs7830.ko:system/lib/modules/mcs7830.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/pegasus.ko:system/lib/modules/pegasus.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/rtl8150.ko:system/lib/modules/rtl8150.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/sierra_net.ko:system/lib/modules/sierra_net.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/smsc75xx.ko:system/lib/modules/smsc75xx.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/smsc95xx.ko:system/lib/modules/smsc95xx.ko \
+    $(LOCAL_PATH)/prebuilt/lib/firmware/kaweth/new_code.bin:system/lib/firmware/kaweth/new_code.bin \
+    $(LOCAL_PATH)/prebuilt/lib/firmware/kaweth/new_code_fix.bin:system/lib/firmware/kaweth/new_code_fix.bin \
+    $(LOCAL_PATH)/prebuilt/lib/firmware/kaweth/trigger_code.bin:system/lib/firmware/kaweth/trigger_code.bin \
+    $(LOCAL_PATH)/prebuilt/lib/firmware/kaweth/trigger_code_fix.bin:system/lib/firmware/kaweth/trigger_code_fix.bin
     
 # hw permissions
 PRODUCT_COPY_FILES += \
