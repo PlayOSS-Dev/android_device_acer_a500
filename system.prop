@@ -1,12 +1,7 @@
 #
 # system.prop for a500 
 #
-# 3GUSB
-rild.libpath=/system/lib/libhuawei-ril.so
-rild.libargs=-d /dev/ttyUSB2
-
-#
-ro.opengles.version=131072 
+ro.opengles.version=196608
 ro.opengles.surface.rgb565=true
 persist.sys.usb.config=mtp,adb 
 ro.sf.lcd_density=160 

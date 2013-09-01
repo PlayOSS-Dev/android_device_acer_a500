@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <glgps xmlns="http://www.glpals.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.glpals.com/ glconfig.xsd" >
 
 <hal
@@ -10,8 +10,8 @@
     ctrlPipe="/data/gps/glgpsctrl"
     lcsApiSockName="/dev/socket/gps"
     gpioNStdbyPath="/sys/class/gpio/gpio203/value"
-    gpioDelayMs="120"
-    arp-supl-enable="false"
+    acNvStoDir="/data/gps/"
+    acNmeaOutName="/data/gps/nmeapipe"  
 />
 
 <!-- GPS configuration with standalone 16.8 MHz TCXO  -->
@@ -20,7 +20,7 @@
     LogFacMask="LOG_GLLAPI | LOG_NMEA | LOG_RAWDATA"
     FrqPlan="FRQ_PLAN_26MHZ_2PPM"
     RfType="GL_RF_4751_DANUBE_EXT_LNA"
-    PeriodicTimeOutSec="30"
+    PeriodicTimeOutSec="40"
 />
 
 <!-- GPS configuration for with 16.8 MHz TCXO
