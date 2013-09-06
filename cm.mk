@@ -20,4 +20,6 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT="acer/a500_ww_gen1/picasso:4.0.3/IML74K/1329824557:user/release-keys" \
     PRIVATE_BUILD_DESC="a500_ww_gen1-user 4.0.3 IML74K 1329824557 release-keys"
 
+# Bootanimation
+PRODUCT_BOOTANIMATION := vendor/cm/prebuilt/common/bootanimation/800.zip
 
