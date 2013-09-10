@@ -16,5 +16,5 @@
 /dev/block/mmcblk1p1    /mnt/sdcard vfat   defaults recoveryonly
 
 # vold-managed volumes ("block device" is actually a sysfs devpath)
-/devices/platform/sdhci-tegra.2/mmc_host/mmc1 /storage/sdcard1 auto default voldmanaged=sdcard:auto
-/devices/platform/tegra-ehci.2 /storage/usbdisk0 auto default voldmanaged=sda:auto
+/devices/platform/sdhci-tegra.2/mmc_host/mmc1 /storage/sdcard1 auto defaults voldmanaged=sdcard:auto
+/devices/platform/tegra-ehci.2 /storage/usbdisk0 auto defaults voldmanaged=sda:auto
