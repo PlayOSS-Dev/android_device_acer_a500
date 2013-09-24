@@ -16,7 +16,7 @@
  */
 
 #define LOG_TAG "audio_hw_primary"
-#define LOG_NDEBUG 0
+/*#define LOG_NDEBUG 0*/
 
 #include <errno.h>
 #include <expat.h>

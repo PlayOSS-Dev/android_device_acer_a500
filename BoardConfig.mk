@@ -22,7 +22,8 @@ TARGET_BOARD_PLATFORM   := tegra
 TARGET_CPU_ABI          := armeabi-v7a
 TARGET_CPU_ABI2         := armeabi
 TARGET_ARCH_VARIANT     := armv7-a
-TARGET_CPU_VARIANT      := generic
+TARGET_CPU_VARIANT      := tegra2
+TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 TARGET_ARCH             := arm
 TARGET_CPU_SMP          := true
@@ -105,6 +106,7 @@ BOARD_FLASH_BLOCK_SIZE              := 131072
 
 # SELinux policies
 HAVE_SELINUX := true
+POLICYVERS   := 24
 
 BOARD_SEPOLICY_DIRS := \
    device/acer/a500/selinux

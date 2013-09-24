@@ -29,3 +29,4 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils libexpat
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+

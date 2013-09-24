@@ -44,7 +44,7 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap \
     tinyrec \
-    Torch \
+    Torch 
 
 # ramdisk
 PRODUCT_COPY_FILES += \
@@ -57,10 +57,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/bcmdhd.cal:system/vendor/firmware/bcmdhd.cal \
     $(LOCAL_PATH)/prebuilt/vendor/firmware/fw_bcmdhd_p2p.bin:system/vendor/firmware/fw_bcmdhd_p2p.bin \
-    $(LOCAL_PATH)/prebuilt/vendor/firmware/BCM4329B1_002.002.023.0797.0863.hcd:system/etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd \
     $(LOCAL_PATH)/prebuilt/bin/wifimacwriter:system/bin/wifimacwriter \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
-    $(LOCAL_PATH)/prebuilt/xbin/rsync:system/xbin/rsync
 
 # usbnet modules
 PRODUCT_COPY_FILES += \
@@ -142,7 +140,18 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=30 \
-    ro.dinfo.radio=Wifi
+    ro.dinfo.radio=Wifi \
+
+# Set default USB interface
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.secure=0 \
+    persist.sys.strictmode.visual=0
+
+ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.strictmode.visual=0
 
 PRODUCT_CHARACTERISTICS := tablet
 
