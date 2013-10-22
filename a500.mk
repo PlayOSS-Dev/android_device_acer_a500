@@ -18,7 +18,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 #kernel
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/kernel:kernel
+    $(LOCAL_PATH)/prebuilt/zImage:kernel
 
 # inherit proprietary files
 $(call inherit-product-if-exists, vendor/acer/a500/a500-vendor.mk)
@@ -33,9 +33,15 @@ PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory \
     audio.a2dp.default \
+    audio.usb.default \
     audio.primary.picasso \
+    hwcomposer.tegra \
+    power.picasso \
     libaudioutils \
     libtinyalsa \
+    l2ping \
+    hciconfig \
+    hcitool \
     libnetcmdiface \
     librs_jni \
     setup_fs \
@@ -108,8 +114,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg \
-    $(LOCAL_PATH)/libaudio/mixer_paths.xml:system/etc/mixer_paths.xml \
-    
+    $(LOCAL_PATH)/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml
+
 # keychars/layout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/usr/idc/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \

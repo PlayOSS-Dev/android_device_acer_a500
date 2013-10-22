@@ -2,6 +2,7 @@ import init.picasso.usb.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
@@ -104,18 +105,18 @@ on boot
     chmod 666 /dev/nvhost-isp
     chmod 666 /dev/nvhost-mpe
     chmod 666 /dev/nvhost-vi
-    chmod 664 /sys/bus/iio/devices/device0/lux
-    chmod 664 /sys/bus/iio/devices/device0/proxim_ir
+    chmod system system /sys/bus/iio/devices/device0/lux
+    chmod system system /sys/bus/iio/devices/device0/proxim_ir
 
 # 4.3 requires
     chmod 0644 /proc/cmdline
 
 # Power management settings
     # cpufreq defaults
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 312000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 216000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1000000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 312000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 216000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1000000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
     # timer 20ms, min sample 80ms, go max at 80%
@@ -123,8 +124,22 @@ on boot
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
     write /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load 80
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 20000
+    write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
     write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
     write /sys/module/cpuidle/parameters/lp2_in_idle 0
+
+# Tegra specific cpufreq policy stuff
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chown system system /sys/module/cpu_tegra/parameters/cpu_user_cap
+    chmod 0664 /sys/module/cpu_tegra/parameters/cpu_user_cap
 
 # RIL
 # Define TCP buffer sizes for hspa networks
@@ -313,11 +328,4 @@ service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
 on property:tf.enable=y
     mkdir /data/tf
     start tf_daemon
-
-# DOCK2 Setting & start service
-on boot
-    chmod 0660 /sys/dock/dock
-    chown system system /sys/dock/dock
-    chmod 0660 /sys/dock/dockin
-    chown system system /sys/dock/dockin
 

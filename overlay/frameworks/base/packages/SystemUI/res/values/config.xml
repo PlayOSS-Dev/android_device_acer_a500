@@ -20,6 +20,6 @@
 <resources>
 
     <!-- Whether rotation lock shows up in quick settings or not -->
-    <bool name="quick_settings_show_rotation_lock">false</bool>
+    <!--<bool name="quick_settings_show_rotation_lock">false</bool> -->
 
 </resources>

@@ -18,33 +18,36 @@
 USE_CAMERA_STUB := false
 
 # Platform
-TARGET_BOARD_PLATFORM   := tegra
-TARGET_CPU_ABI          := armeabi-v7a
-TARGET_CPU_ABI2         := armeabi
-TARGET_ARCH_VARIANT     := armv7-a
-TARGET_CPU_VARIANT      := tegra2
+TARGET_BOARD_PLATFORM := tegra
+TARGET_TEGRA_VERSION := t20
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a
+TARGET_CPU_VARIANT := tegra2
 TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_ARCH_VARIANT_FPU := vfpv3-d16
-TARGET_ARCH             := arm
-TARGET_CPU_SMP          := true
+TARGET_ARCH := arm
+TARGET_CPU_SMP := true
+
 ARCH_ARM_HIGH_OPTIMIZATION := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
+
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := picasso
 TARGET_OTA_ASSERT_DEVICE := picasso,a500
 USE_ALL_OPTIMIZED_STRING_FUNCS := true
 
 # kernel
+#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.6
 #TARGET_KERNEL_SOURCE := kernel/acer/a500
 #TARGET_KERNEL_CONFIG := jellyplay_defconfig
-TARGET_PREBUILT_KERNEL := device/acer/a500/prebuilt/kernel
+TARGET_PREBUILT_KERNEL := device/acer/a500/prebuilt/zImage
 BOARD_KERNEL_CMDLINE :=
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_PAGE_SIZE := 0x00000800
 
 # Recovery
 #TARGET_RECOVERY_KERNEL := device/acer/a500/recovery/recovery_kernel
-#TARGET_RECOVERY_INITRC := device/acer/a500/recovery/init.recovery.rc
 #TARGET_RECOVERY_FSTAB := device/acer/a500/recovery/recovery.fstab
 TARGET_RECOVERY_FSTAB := device/acer/a500/ramdisk/fstab.picasso
 RECOVERY_FSTAB_VERSION := 2
@@ -67,9 +70,10 @@ BOARD_USES_OVERLAY := true
 BOARD_EGL_NEEDS_LEGACY_FB := true
 
 # Audio
-BOARD_USES_GENERIC_AUDIO := true
+#TARGET_PROVIDES_LIBAUDIO := true
+#BOARD_USES_AUDIO_LEGACY := true
+BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := false
-USE_PROPRIETARY_AUDIO_EXTENSIONS := false
 
 # GPS
 BOARD_HAVE_GPS := true
@@ -77,6 +81,7 @@ BOARD_HAVE_GPS := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/acer/a500/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/acer/a500/bluetooth/bt_vendor.conf
 
@@ -112,8 +117,23 @@ BOARD_SEPOLICY_DIRS := \
    device/acer/a500/selinux
 
 BOARD_SEPOLICY_UNION := \
-   file_contexts \
-   file.te \
-   device.te \
-   domain.te
+    file_contexts \
+    app.te \
+    device.te \
+    drmserver.te \
+    file.te \
+    genfs_contexts \
+    init.te \
+    media_app.te \
+    release_app.te \
+    mediaserver.te \
+    platform_app.te \
+    sensors_config.te \
+    shared_app.te \
+    surfaceflinger.te \
+    system_app.te \
+    system.te \
+    wpa_socket.te \
+    wpa.te \
+    zygote.te
 

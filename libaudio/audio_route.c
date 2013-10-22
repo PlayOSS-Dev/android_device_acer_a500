@@ -383,6 +383,8 @@ void audio_route_apply_path(struct audio_route *ar, const char *name)
 {
     struct mixer_path *path;
 
+    ALOGV("audio_route_apply_path:%s", name);
+
     if (!ar) {
         ALOGE("invalid audio_route");
         return;
